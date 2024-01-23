@@ -5,12 +5,10 @@ import com.easycoffee.backend.coffeebook.dto.CoffeeBookSaveDto;
 import com.easycoffee.backend.coffeebook.dto.CoffeeBookUpdateDto;
 import com.easycoffee.backend.coffeebook.service.CoffeeBookService;
 import com.easycoffee.backend.coffeebook.enumeration.DeleteResponse;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Getter
 @RestController
 @RequiredArgsConstructor
 public class CoffeeBookApiController {
@@ -27,9 +25,9 @@ public class CoffeeBookApiController {
         return coffeeBookService.save(coffeeBookSaveDto);
     }
 
-    @DeleteMapping("/easycoffee/coffeebook/{coffeeBookId}")
-    public ResponseEntity<DeleteResponse> delete(@PathVariable("coffeeBookId") Long coffeeBookId) {
-        return coffeeBookService.delete(coffeeBookId);
+    @DeleteMapping("/easycoffee/coffeebook/remove/{coffeeBookId}")
+    public ResponseEntity<DeleteResponse> remove(@PathVariable("coffeeBookId") Long coffeeBookId) {
+        return coffeeBookService.remove(coffeeBookId);
     }
 
     @PatchMapping("/easycoffee/coffeebook/update")

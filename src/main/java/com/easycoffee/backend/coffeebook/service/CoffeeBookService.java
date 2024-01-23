@@ -60,7 +60,7 @@ public class CoffeeBookService {
      * @param coffeeBookId 커피 도감 아이디입니다.
      * @return 삭제 시 HttpStatus 응답코드 200번과 "SUCCESS"를 반환합니다.
      */
-    public ResponseEntity<DeleteResponse> delete(Long coffeeBookId) {
+    public ResponseEntity<DeleteResponse> remove(Long coffeeBookId) {
         CoffeeBook coffeeBook = coffeeBookRepository.find(coffeeBookId);
         coffeeBookRepository.remove(coffeeBookId);
         return ResponseEntity.status(HttpStatus.OK).body(DeleteResponse.SUCCESS);
