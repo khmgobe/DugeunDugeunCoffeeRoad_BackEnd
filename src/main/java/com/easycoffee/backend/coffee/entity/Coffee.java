@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static jakarta.persistence.EnumType.STRING;
 import static lombok.AccessLevel.*;
 
 @Entity
@@ -29,12 +30,15 @@ public class Coffee {
     private String name;
 
     @Column(name = "coffee_taste_type")
+    @Enumerated(STRING)
     private TasteType tasteType;
 
     @Column(name = "coffee_sensation_type")
+    @Enumerated(STRING)
     private SensationType sensationType;
 
     @Column(name = "coffee_beverage_type")
+    @Enumerated(STRING)
     private BeverageType beverageType;
 
     @Column(name = "coffee_company", nullable = true)
