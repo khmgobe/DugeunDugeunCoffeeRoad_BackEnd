@@ -14,7 +14,7 @@ public class CoffeeApiController {
     private final CoffeeService coffeeService;
 
     @PostMapping("/easycoffee/coffee/create")
-    public CoffeeResponseDto create(@RequestBody CoffeeSaveDto coffeeSaveDto) {
+    public CoffeeResponseDto save(@RequestBody CoffeeSaveDto coffeeSaveDto) {
         return coffeeService.save(coffeeSaveDto);
     }
 

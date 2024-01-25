@@ -3,7 +3,6 @@ package com.easycoffee.backend.coffee.entity;
 import com.easycoffee.backend.coffee.dto.CoffeeUpdateDto;
 import com.easycoffee.backend.coffee.enumeration.BeverageType;
 import com.easycoffee.backend.coffee.enumeration.SensationType;
-import com.easycoffee.backend.coffee.enumeration.TasteType;
 import com.easycoffee.backend.coffeebean.entity.CoffeeBean;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,10 +28,6 @@ public class Coffee {
     @Column(name = "coffee_name")
     private String name;
 
-    @Column(name = "coffee_taste_type")
-    @Enumerated(STRING)
-    private TasteType tasteType;
-
     @Column(name = "coffee_sensation_type")
     @Enumerated(STRING)
     private SensationType sensationType;
@@ -48,10 +43,11 @@ public class Coffee {
     @JoinColumn(name = "bean_id")
     private CoffeeBean coffeeBean;
 
+
     public void updateCoffee(CoffeeUpdateDto coffeeUpdateDto) {
         this.name = coffeeUpdateDto.getName();
-        this.tasteType = coffeeUpdateDto.getTasteType();
         this.sensationType = coffeeUpdateDto.getSensationType();
         this.beverageType = coffeeUpdateDto.getBeverageType();
+        this.company = coffeeUpdateDto.getCompany();
     }
 }
