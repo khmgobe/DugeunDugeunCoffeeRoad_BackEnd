@@ -6,6 +6,8 @@ import com.easycoffee.backend.coffeebook.dto.CoffeeBookUpdateDto;
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.repository.CoffeeBookRepository;
 import com.easycoffee.backend.coffeebook.enumeration.DeleteResponse;
+import com.easycoffee.backend.common.exception.BadRequestException;
+import com.easycoffee.backend.common.enumeration.CommonErrorType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -73,6 +76,7 @@ public class CoffeeBookService {
      * @return 삭제 시 HttpStatus 응답코드 200번과 "SUCCESS"를 반환합니다.
      */
     public ResponseEntity<DeleteResponse> remove(Long coffeeBookId) {
+        Optional.ofNullable(coffeeBookId).orElseThrow(() -> new BadRequestException(CommonErrorType.NO_ELEMENT));
         coffeeBookRepository.remove(coffeeBookId);
         return ResponseEntity.status(HttpStatus.OK).body(DeleteResponse.SUCCESS);
     }
