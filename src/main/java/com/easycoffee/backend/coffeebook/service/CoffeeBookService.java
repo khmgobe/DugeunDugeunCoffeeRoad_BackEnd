@@ -7,11 +7,15 @@ import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.repository.CoffeeBookRepository;
 import com.easycoffee.backend.coffeebook.enumeration.DeleteResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -32,22 +36,30 @@ public class CoffeeBookService {
     }
 
     /**
-     * 커피 도감을 찾습니다.
+     * 커피 도감을 한 건 찾습니다.
      * @param coffeeBookId
      * @return
      */
-    public CoffeeBookResponseDto find(Long coffeeBookId) {
-        CoffeeBook coffeeBook = coffeeBookRepository.find(coffeeBookId);
+    public CoffeeBookResponseDto findById(Long coffeeBookId) {
+        CoffeeBook coffeeBook = coffeeBookRepository.findById(coffeeBookId);
         return CoffeeBookResponseDto.response(coffeeBook);
     }
 
+    /**
+     * 커피 도감의 전체 목록을 가져옵니다.
+     * @return 커피 도감의 응답 반환 객체를 리스트로 반환합니다.
+     */
+    public List<CoffeeBookResponseDto> find() {
+        List<CoffeeBook> coffeeBookList = coffeeBookRepository.find();
+        return coffeeBookList.stream().map(CoffeeBookResponseDto::response).toList();
+    }
     /**
      * 커피 도감을 수정합니다.
      * @param coffeeBookUpdateDto 커피 도감 수정 Dto 객체입니다.
      * @return
      */
     public CoffeeBookResponseDto update(CoffeeBookUpdateDto coffeeBookUpdateDto) {
-        CoffeeBook coffeeBook = coffeeBookRepository.find(coffeeBookUpdateDto.getId());
+        CoffeeBook coffeeBook = coffeeBookRepository.findById(coffeeBookUpdateDto.getId());
         coffeeBook.updateBook(coffeeBookUpdateDto);
         coffeeBookRepository.update(coffeeBook);
         return CoffeeBookResponseDto.response(coffeeBook);
@@ -61,7 +73,6 @@ public class CoffeeBookService {
      * @return 삭제 시 HttpStatus 응답코드 200번과 "SUCCESS"를 반환합니다.
      */
     public ResponseEntity<DeleteResponse> remove(Long coffeeBookId) {
-        CoffeeBook coffeeBook = coffeeBookRepository.find(coffeeBookId);
         coffeeBookRepository.remove(coffeeBookId);
         return ResponseEntity.status(HttpStatus.OK).body(DeleteResponse.SUCCESS);
     }

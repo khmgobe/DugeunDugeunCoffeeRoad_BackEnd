@@ -63,6 +63,7 @@ public class CoffeeBook {
         this.title = coffeeBookUpdateDto.getTitle();
         this.content = coffeeBookUpdateDto.getContent();
         this.bookType = coffeeBookUpdateDto.getBookType();
+        this.bookType = coffeeBookUpdateDto.getBookType();
         this.update_at = coffeeBookUpdateDto.getUpdate_at();
     }
 }

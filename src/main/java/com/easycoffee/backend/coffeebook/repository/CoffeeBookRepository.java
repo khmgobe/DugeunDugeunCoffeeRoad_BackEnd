@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 @Repository
 public class CoffeeBookRepository {
@@ -16,8 +17,12 @@ public class CoffeeBookRepository {
         em.persist(coffeeBook);
     }
 
-    public CoffeeBook find(Long id) {
+    public CoffeeBook findById(Long id) {
         return em.find(CoffeeBook.class, id);
+    }
+
+    public List<CoffeeBook> find() {
+         return  em.createQuery("select c from CoffeeBook c", CoffeeBook.class).getResultList();
     }
 
     public void update(CoffeeBook coffeeBook) {

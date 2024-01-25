@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class CoffeeBookApiController {
@@ -16,8 +18,13 @@ public class CoffeeBookApiController {
     private final CoffeeBookService coffeeBookService;
 
     @GetMapping("/easycoffee/coffeebook/{coffeeBookId}")
-    public CoffeeBookResponseDto find(@PathVariable("coffeeBookId") Long coffeeBookId) {
-        return coffeeBookService.find(coffeeBookId);
+    public CoffeeBookResponseDto findById(@PathVariable("coffeeBookId") Long coffeeBookId) {
+        return coffeeBookService.findById(coffeeBookId);
+    }
+
+    @GetMapping("/easycoffee/coffeebook/find")
+    public List<CoffeeBookResponseDto> find() {
+        return coffeeBookService.find();
     }
 
     @PostMapping("/easycoffee/coffeebook/save")
