@@ -4,15 +4,11 @@ import com.easycoffee.backend.coffeebook.dto.CoffeeBookSaveDto;
 import com.easycoffee.backend.coffeebook.dto.CoffeeBookUpdateDto;
 import com.easycoffee.backend.coffeebook.enumeration.BookType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-
 import static jakarta.persistence.EnumType.*;
 import static lombok.AccessLevel.*;
 
@@ -24,7 +20,7 @@ import static lombok.AccessLevel.*;
 @NoArgsConstructor(access = PROTECTED)
 public class CoffeeBook {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long id;
 

@@ -2,9 +2,6 @@ package com.easycoffee.backend.coffeebean.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-
-
 import static lombok.AccessLevel.*;
 
 @Entity
@@ -15,7 +12,7 @@ import static lombok.AccessLevel.*;
 @NoArgsConstructor(access = PROTECTED)
 public class CoffeeBean {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bean_id")
     private Long id;
 
