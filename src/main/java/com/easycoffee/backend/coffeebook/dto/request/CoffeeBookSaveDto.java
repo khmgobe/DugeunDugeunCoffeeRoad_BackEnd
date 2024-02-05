@@ -1,12 +1,13 @@
-package com.easycoffee.backend.coffeebook.dto;
+package com.easycoffee.backend.coffeebook.dto.request;
 
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.BookType;
+import com.easycoffee.backend.common.util.ListConverter;
+import jakarta.persistence.Convert;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static lombok.AccessLevel.*;
 
@@ -16,6 +17,7 @@ import static lombok.AccessLevel.*;
 @NoArgsConstructor(access = PROTECTED)
 public class CoffeeBookSaveDto {
 
+
     private Long id;
 
     private String title;
@@ -24,20 +26,18 @@ public class CoffeeBookSaveDto {
 
     private BookType bookType;
 
-    @CreatedDate
+    @Convert(converter = ListConverter.class)
+    private List<String> flavor;
+
     private LocalDateTime create_at;
-
-    @LastModifiedDate
-    private LocalDateTime update_at;
-
 
     public CoffeeBook toEntity() {
         return CoffeeBook.builder().
                 title(title).
                 content(content).
                 bookType(bookType).
+                flavor(flavor).
                 create_at(create_at).
-                update_at(update_at).
                 build();
     }
 }
