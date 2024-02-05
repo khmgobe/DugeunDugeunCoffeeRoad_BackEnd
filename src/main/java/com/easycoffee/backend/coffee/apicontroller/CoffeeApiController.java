@@ -20,7 +20,7 @@ public class CoffeeApiController {
         return coffeeService.save(coffeeSaveDto);
     }
 
-    @GetMapping("/easycoffee/coffee/find{id}")
+    @GetMapping("/easycoffee/coffee/find/{id}")
     public CoffeeResponseDto find(@PathVariable(name = "id", required = false) Long id) {
         return coffeeService.find(id);
     }
