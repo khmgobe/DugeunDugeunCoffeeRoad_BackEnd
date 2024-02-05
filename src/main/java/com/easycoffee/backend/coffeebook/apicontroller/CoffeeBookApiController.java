@@ -1,44 +1,51 @@
 package com.easycoffee.backend.coffeebook.apicontroller;
 
-import com.easycoffee.backend.coffeebook.dto.CoffeeBookResponseDto;
-import com.easycoffee.backend.coffeebook.dto.CoffeeBookSaveDto;
-import com.easycoffee.backend.coffeebook.dto.CoffeeBookUpdateDto;
+import com.easycoffee.backend.coffeebook.dto.response.CoffeeBookDeleteResponseDto;
+import com.easycoffee.backend.coffeebook.dto.response.CoffeeBookResponseDto;
+import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookSaveDto;
+import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookUpdateDto;
+import com.easycoffee.backend.coffeebook.dto.response.CoffeeBookSaveResponseDto;
+import com.easycoffee.backend.coffeebook.dto.response.CoffeeBookUpdateResponseDto;
 import com.easycoffee.backend.coffeebook.service.CoffeeBookService;
-import com.easycoffee.backend.coffeebook.enumeration.DeleteResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "커피도감", description = "커피도감 API 컨트롤러 페이지")
 public class CoffeeBookApiController {
 
     private final CoffeeBookService coffeeBookService;
 
-    @GetMapping("/easycoffee/coffeebook/{coffeeBookId}")
-    public CoffeeBookResponseDto findById(@PathVariable("coffeeBookId") Long coffeeBookId) {
-        return coffeeBookService.findById(coffeeBookId);
+    @Operation(summary = "커피도감 1건을 조회합니다.")
+    @GetMapping("/easycoffee/coffeebooks/{id}")
+    public CoffeeBookResponseDto findById(@PathVariable("id") Long id) {
+        return coffeeBookService.findById(id);
     }
 
-    @GetMapping("/easycoffee/coffeebook/find")
+    @Operation(summary = "모든 커피도감을 다 조회합니다.")
+    @GetMapping("/easycoffee/coffeebooks/find")
     public List<CoffeeBookResponseDto> find() {
         return coffeeBookService.find();
     }
 
-    @PostMapping("/easycoffee/coffeebook/save")
-    public CoffeeBookResponseDto save(@RequestBody CoffeeBookSaveDto coffeeBookSaveDto) {
+    @Operation(summary = "커피도감을 저장합니다.")
+    @PostMapping("/easycoffee/coffeebooks/save")
+    public CoffeeBookSaveResponseDto save(@RequestBody CoffeeBookSaveDto coffeeBookSaveDto) {
         return coffeeBookService.save(coffeeBookSaveDto);
     }
 
-    @DeleteMapping("/easycoffee/coffeebook/remove")
-    public ResponseEntity<DeleteResponse> remove(@RequestParam(value = "coffeeBookId", required = false) Long coffeeBookId) {
-        return coffeeBookService.remove(coffeeBookId);
+    @DeleteMapping("/easycoffee/coffeebooks/remove")
+    public CoffeeBookDeleteResponseDto remove(@RequestParam(value = "id", required = false) Long id) {
+        return coffeeBookService.remove(id);
     }
 
-    @PatchMapping("/easycoffee/coffeebook/update")
-    public CoffeeBookResponseDto update(@RequestBody CoffeeBookUpdateDto coffeeBookUpdateDto) {
+    @PatchMapping("/easycoffee/coffeebooks/update")
+    public CoffeeBookUpdateResponseDto update(@RequestBody CoffeeBookUpdateDto coffeeBookUpdateDto) {
         return coffeeBookService.update(coffeeBookUpdateDto);
     }
 }

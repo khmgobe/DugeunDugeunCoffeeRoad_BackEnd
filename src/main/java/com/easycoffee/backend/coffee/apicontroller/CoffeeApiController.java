@@ -4,9 +4,11 @@ import com.easycoffee.backend.coffee.dto.CoffeeResponseDto;
 import com.easycoffee.backend.coffee.dto.CoffeeSaveDto;
 import com.easycoffee.backend.coffee.dto.CoffeeUpdateDto;
 import com.easycoffee.backend.coffee.service.CoffeeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "커피", description = "커피 API 컨트롤러 페이지")
 @RestController
 @RequiredArgsConstructor
 public class CoffeeApiController {
