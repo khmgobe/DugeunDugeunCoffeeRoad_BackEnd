@@ -39,8 +39,8 @@ public class CoffeeBookApiController {
         return coffeeBookService.save(coffeeBookSaveDto);
     }
 
-    @DeleteMapping("/easycoffee/coffeebooks/remove")
-    public CoffeeBookDeleteResponseDto remove(@RequestParam(value = "id", required = false) Long id) {
+    @DeleteMapping("/easycoffee/coffeebooks/remove/{id}")
+    public CoffeeBookDeleteResponseDto remove(@PathVariable(value = "id", required = false) Long id) {
         return coffeeBookService.remove(id);
     }
 
