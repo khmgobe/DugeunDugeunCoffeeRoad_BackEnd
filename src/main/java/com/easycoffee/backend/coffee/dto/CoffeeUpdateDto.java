@@ -19,6 +19,8 @@ public class CoffeeUpdateDto {
 
     private SensationType sensationType;
 
+    private List<String> flavor;
+
     private BeverageType beverageType;
 
     private String company;

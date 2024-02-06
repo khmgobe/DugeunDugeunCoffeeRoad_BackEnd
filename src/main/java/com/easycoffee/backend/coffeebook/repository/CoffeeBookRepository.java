@@ -22,7 +22,7 @@ public class CoffeeBookRepository {
     }
 
     public List<CoffeeBook> find() {
-         return  em.createQuery("select c from CoffeeBook c", CoffeeBook.class).getResultList();
+         return em.createQuery("select c from CoffeeBook c", CoffeeBook.class).getResultList();
     }
 
     public void update(CoffeeBook coffeeBook) {

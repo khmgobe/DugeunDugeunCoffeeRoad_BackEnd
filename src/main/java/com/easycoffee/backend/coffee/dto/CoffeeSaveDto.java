@@ -4,7 +4,6 @@ import com.easycoffee.backend.coffee.entity.Coffee;
 import com.easycoffee.backend.coffee.enumeration.BeverageType;
 import com.easycoffee.backend.coffee.enumeration.SensationType;
 import lombok.Getter;
-
 import java.util.List;
 
 @Getter
@@ -19,13 +18,17 @@ public class CoffeeSaveDto {
 
     private SensationType sensationType;
 
+    private List<String> flavor;
+
     private BeverageType beverageType;
 
     private String company;
 
     public Coffee toEntity() {
         return Coffee.builder().
-               name(name).
+                name(name).
+                tasteType(tasteType).
+                flavor(flavor).
                 sensationType(sensationType).
                 beverageType(beverageType).
                 company(company).
