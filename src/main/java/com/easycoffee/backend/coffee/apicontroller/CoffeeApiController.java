@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "커피", description = "커피 API 컨트롤러 페이지")
 @RestController
 @RequiredArgsConstructor
@@ -15,14 +17,19 @@ public class CoffeeApiController {
 
     private final CoffeeService coffeeService;
 
-    @PostMapping("/easycoffee/coffee/create")
+    @PostMapping("/easycoffee/coffees/save")
     public CoffeeResponseDto save(@RequestBody CoffeeSaveDto coffeeSaveDto) {
         return coffeeService.save(coffeeSaveDto);
     }
 
-    @GetMapping("/easycoffee/coffee/find/{id}")
-    public CoffeeResponseDto find(@PathVariable(name = "id", required = false) Long id) {
-        return coffeeService.find(id);
+    @GetMapping("/easycoffee/coffees/{id}")
+    public CoffeeResponseDto findById(@PathVariable(name = "id", required = false) Long id) {
+        return coffeeService.findById(id);
+    }
+
+    @GetMapping("/easycoffee/coffees/find")
+    public List<CoffeeResponseDto> find() {
+        return coffeeService.find();
     }
 
     @PatchMapping("/easycoffee/coffee/update")
