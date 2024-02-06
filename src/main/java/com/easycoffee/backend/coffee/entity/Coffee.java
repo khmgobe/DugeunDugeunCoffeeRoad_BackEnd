@@ -3,6 +3,7 @@ package com.easycoffee.backend.coffee.entity;
 import com.easycoffee.backend.coffee.dto.CoffeeUpdateDto;
 import com.easycoffee.backend.coffee.enumeration.BeverageType;
 import com.easycoffee.backend.coffee.enumeration.SensationType;
+import com.easycoffee.backend.coffeebean.entity.CoffeeBean;
 import com.easycoffee.backend.common.util.BaseEntity;
 import com.easycoffee.backend.common.util.ListConverter;
 import jakarta.persistence.*;
@@ -48,9 +49,9 @@ public class Coffee extends BaseEntity {
     @Column(name = "coffee_company", nullable = true)
     private String company;
 
-//    @ManyToOne 보류
-//    @JoinColumn(name = "bean_id")
-//    private CoffeeBean coffeeBean;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bean_id")
+    private CoffeeBean coffeeBean;
 
 
     public void updateCoffee(CoffeeUpdateDto coffeeUpdateDto) {
