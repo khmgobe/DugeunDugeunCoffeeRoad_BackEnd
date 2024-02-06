@@ -22,6 +22,8 @@ public class CoffeeBookSaveResponseDto {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    private Boolean deleted;
+
     private LocalDateTime create_date;
 
     private LocalDateTime update_date;
@@ -33,6 +35,7 @@ public class CoffeeBookSaveResponseDto {
                 title(coffeeBook.getTitle()).
                 content(coffeeBook.getContent()).
                 category(coffeeBook.getCategory()).
+                deleted(false).
                 create_date(coffeeBook.getCreateDate()).
                 update_date(coffeeBook.getUpdateDate()).
                 build();

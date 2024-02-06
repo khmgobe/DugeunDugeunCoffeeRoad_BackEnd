@@ -30,6 +30,10 @@ public class CoffeeBook extends BaseEntity {
     @Column(name = "book_category")
     @Enumerated(EnumType.STRING)
     private Category category;
+
+    @Column(name = "book_deleted")
+    private Boolean deleted;
+
     public CoffeeBookSaveDto toDto() {
         return CoffeeBookSaveDto.builder().
                 title(title).

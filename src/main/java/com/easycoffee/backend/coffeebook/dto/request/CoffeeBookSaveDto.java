@@ -23,11 +23,13 @@ public class CoffeeBookSaveDto {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    private Boolean deleted;
     public CoffeeBook toEntity() {
         return CoffeeBook.builder().
                 title(title).
                 content(content).
                 category(category).
+                deleted(false).
                 build();
     }
 }
