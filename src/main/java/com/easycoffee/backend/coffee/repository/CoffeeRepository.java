@@ -1,10 +1,11 @@
 package com.easycoffee.backend.coffee.repository;
 
-import com.easycoffee.backend.coffee.dto.CoffeeResponseDto;
 import com.easycoffee.backend.coffee.entity.Coffee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CoffeeRepository {
@@ -16,8 +17,12 @@ public class CoffeeRepository {
         em.persist(coffee);
     }
 
-    public Coffee find(Long id) {
+    public Coffee findById(Long id) {
         return em.find(Coffee.class, id);
+    }
+
+    public List<Coffee> find() {
+        return em.createQuery("select c from Coffee c ", Coffee.class).getResultList();
     }
 
     public void update(Coffee coffee) {
