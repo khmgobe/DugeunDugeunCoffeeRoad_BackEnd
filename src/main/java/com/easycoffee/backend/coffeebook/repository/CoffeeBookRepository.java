@@ -29,9 +29,16 @@ public class CoffeeBookRepository {
         em.merge(coffeeBook);
     }
 
-    public void remove(Long id) {
+    public void completelyDelete(Long id) {
         em.createQuery("delete from CoffeeBook c where c.id =: id ").
                 setParameter("id", id).executeUpdate();
+
+        em.flush();
+        em.clear();
+    }
+
+    public void delete(Long id) {
+         em.createQuery("update CoffeeBook c set c.deleted = true where c.id =: id").setParameter("id", id).executeUpdate();
 
         em.flush();
         em.clear();

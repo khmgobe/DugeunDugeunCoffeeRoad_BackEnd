@@ -9,7 +9,7 @@ import com.easycoffee.backend.coffeebook.dto.response.CoffeeBookUpdateResponseDt
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.repository.CoffeeBookRepository;
 import com.easycoffee.backend.common.exception.BadRequestException;
-import com.easycoffee.backend.common.enumeration.CommonErrorType;
+import com.easycoffee.backend.common.enumeration.CommonResponseType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,9 +72,19 @@ public class CoffeeBookService {
      * @param id 커피 도감 아이디입니다.
      * @return 삭제 시 HttpStatus 응답코드 200번과 "SUCCESS"를 반환합니다.
      */
-    public CoffeeBookDeleteResponseDto remove(Long id) {
-        Optional.ofNullable(id).orElseThrow(() -> new BadRequestException(CommonErrorType.NO_ELEMENT));
-        coffeeBookRepository.remove(id);
+    public CoffeeBookDeleteResponseDto completelyDelete(Long id) {
+        CheckIdDelete(id);
+        coffeeBookRepository.completelyDelete(id);
+        return CoffeeBookDeleteResponseDto.deleteResponse(id);
+    }
+
+    private void CheckIdDelete(Long id) {
+        Optional.ofNullable(coffeeBookRepository.findById(id)).orElseThrow(() ->  new BadRequestException(CommonResponseType.NO_ELEMENT));
+    }
+
+    public CoffeeBookDeleteResponseDto delete(Long id) {
+        CheckIdDelete(id);
+        coffeeBookRepository.delete(id);
         return CoffeeBookDeleteResponseDto.deleteResponse(id);
     }
 }
