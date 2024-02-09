@@ -1,5 +1,6 @@
 package com.easycoffee.backend.coffeebook.dto.request;
 
+import com.easycoffee.backend.coffee.dto.CoffeeSaveDto;
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,12 +28,15 @@ public class CoffeeBookSaveDto {
     @Schema(defaultValue = "false", description = "삭제 여부", hidden = true)
     private Boolean deleted;
 
+    private CoffeeSaveDto coffee;
+
     public CoffeeBook toEntity() {
         return CoffeeBook.builder().
                 title(title).
                 content(content).
                 category(category).
                 deleted(false).
+                coffee(coffee.toEntity()).
                 build();
     }
 }

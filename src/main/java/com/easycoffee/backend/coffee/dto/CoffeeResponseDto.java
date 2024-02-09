@@ -3,7 +3,7 @@ package com.easycoffee.backend.coffee.dto;
 import com.easycoffee.backend.coffee.entity.Coffee;
 import com.easycoffee.backend.coffee.enumeration.BeverageType;
 import com.easycoffee.backend.coffee.enumeration.SensationType;
-import com.easycoffee.backend.coffeebean.entity.CoffeeBean;
+import com.easycoffee.backend.coffeebean.dto.CoffeeBeanResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,9 +18,9 @@ public class CoffeeResponseDto {
 
     private String name;
 
-    private List<String> tasteType;
-
     private SensationType sensationType;
+
+    private List<String> flavor;
 
     private BeverageType beverageType;
 
@@ -30,19 +30,18 @@ public class CoffeeResponseDto {
 
     private LocalDateTime update_date;
 
-    private CoffeeBean coffeeBean;
+    private CoffeeBeanResponseDto coffeeBean;
 
     public static CoffeeResponseDto response(Coffee coffee) {
         return CoffeeResponseDto.builder().
                 id(coffee.getId()).
                 name(coffee.getName()).
-                tasteType(coffee.getTasteType()).
                 sensationType(coffee.getSensationType()).
                 beverageType(coffee.getBeverageType()).
                 company(coffee.getCompany()).
                 create_date(coffee.getCreateDate()).
                 update_date(coffee.getUpdateDate()).
-                coffeeBean(coffee.getCoffeeBean()).
+                coffeeBean(coffee.getCoffeeBean().toDto()).
                 build();
     }
 }

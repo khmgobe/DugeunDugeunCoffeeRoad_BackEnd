@@ -1,5 +1,6 @@
 package com.easycoffee.backend.coffeebook.dto.response;
 
+import com.easycoffee.backend.coffee.dto.CoffeeResponseDto;
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
 import jakarta.persistence.EnumType;
@@ -28,6 +29,8 @@ public class CoffeeBookResponseDto {
 
     private Boolean deleted;
 
+    private CoffeeResponseDto coffee;
+
     public static CoffeeBookResponseDto response(CoffeeBook coffeeBook) {
         return CoffeeBookResponseDto.builder().
                 id(coffeeBook.getId()).
@@ -37,6 +40,7 @@ public class CoffeeBookResponseDto {
                 create_date(coffeeBook.getCreateDate()).
                 update_date(coffeeBook.getUpdateDate()).
                 deleted(coffeeBook.getDeleted()).
+                coffee(coffeeBook.getCoffee().toDto()).
                 build();
     }
 }

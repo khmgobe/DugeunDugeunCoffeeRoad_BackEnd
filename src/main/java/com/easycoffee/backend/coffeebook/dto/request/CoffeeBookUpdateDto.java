@@ -1,5 +1,6 @@
 package com.easycoffee.backend.coffeebook.dto.request;
 
+import com.easycoffee.backend.coffee.dto.CoffeeUpdateDto;
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
 import jakarta.persistence.EnumType;
@@ -8,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -35,5 +34,11 @@ public class CoffeeBookUpdateDto {
                 content(content).
                 category(category).
                 build();
+    }
+
+    public void updateBook(CoffeeBookUpdateDto coffeeBookUpdateDto) {
+        this.title = coffeeBookUpdateDto.getTitle();
+        this.content = coffeeBookUpdateDto.getContent();
+        this.category = coffeeBookUpdateDto.getCategory();
     }
 }

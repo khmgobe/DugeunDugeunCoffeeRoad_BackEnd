@@ -68,9 +68,9 @@ public class CoffeeBookService {
 
 
     /**
-     * 커피 도감을 삭제합니다.
+     * 커피 도감을 완전히 삭제합니다.
      * @param id 커피 도감 아이디입니다.
-     * @return 삭제 시 HttpStatus 응답코드 200번과 "SUCCESS"를 반환합니다.
+     * @return 삭제 시 HttpStatus와 응답 결과를 반환합니다.
      */
     public CoffeeBookDeleteResponseDto completelyDelete(Long id) {
         CheckIdDelete(id);
@@ -78,13 +78,23 @@ public class CoffeeBookService {
         return CoffeeBookDeleteResponseDto.deleteResponse(id);
     }
 
-    private void CheckIdDelete(Long id) {
-        Optional.ofNullable(coffeeBookRepository.findById(id)).orElseThrow(() ->  new BadRequestException(CommonResponseType.NO_ELEMENT));
-    }
-
+    /**
+     * 커피 도감을 삭제상태로 "업데이트"합니다.
+     * @param id 커피 도감 아이디입니다.
+     * @return 삭제 시 반환받는 HttpStatus와 응답 결과를 반환 받습니다.
+     */
     public CoffeeBookDeleteResponseDto delete(Long id) {
         CheckIdDelete(id);
         coffeeBookRepository.delete(id);
         return CoffeeBookDeleteResponseDto.deleteResponse(id);
+    }
+
+    /**
+     * 커피 도감 아이디가 있는지 확인 후 유효하지 않다(없다)면 NO_ELEMENT 응답 타입을 내립니다.
+     * @param id 커피 도감 아이디입니다.
+     */
+    private void CheckIdDelete(Long id) {
+        Optional.ofNullable(coffeeBookRepository.findById(id)).orElseThrow(() ->
+                new BadRequestException(CommonResponseType.NO_ELEMENT));
     }
 }

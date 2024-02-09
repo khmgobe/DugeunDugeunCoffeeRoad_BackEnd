@@ -1,5 +1,6 @@
 package com.easycoffee.backend.coffeebook.entity;
 
+import com.easycoffee.backend.coffee.entity.Coffee;
 import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookSaveDto;
 import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookUpdateDto;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
@@ -7,7 +8,6 @@ import com.easycoffee.backend.common.util.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
-
 import static lombok.AccessLevel.*;
 
 @Entity
@@ -38,6 +38,11 @@ public class CoffeeBook extends BaseEntity {
     @Column(name = "book_deleted")
     @Schema(defaultValue = "false", description = "삭제 여부", hidden = true)
     private Boolean deleted;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Schema(description = "원두")
+    @JoinColumn(name = "coffee_id")
+    private Coffee coffee;
 
     public CoffeeBookSaveDto toDto() {
         return CoffeeBookSaveDto.builder().
