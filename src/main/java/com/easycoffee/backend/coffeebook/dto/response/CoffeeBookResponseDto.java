@@ -26,6 +26,8 @@ public class CoffeeBookResponseDto {
 
     private LocalDateTime update_date;
 
+    private Boolean deleted;
+
     public static CoffeeBookResponseDto response(CoffeeBook coffeeBook) {
         return CoffeeBookResponseDto.builder().
                 id(coffeeBook.getId()).
@@ -34,6 +36,7 @@ public class CoffeeBookResponseDto {
                 category(coffeeBook.getCategory()).
                 create_date(coffeeBook.getCreateDate()).
                 update_date(coffeeBook.getUpdateDate()).
+                deleted(coffeeBook.getDeleted()).
                 build();
     }
 }

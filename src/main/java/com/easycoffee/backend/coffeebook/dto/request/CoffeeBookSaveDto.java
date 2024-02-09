@@ -2,6 +2,7 @@ package com.easycoffee.backend.coffeebook.dto.request;
 
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
@@ -23,7 +24,9 @@ public class CoffeeBookSaveDto {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Schema(defaultValue = "false", description = "삭제 여부", hidden = true)
     private Boolean deleted;
+
     public CoffeeBook toEntity() {
         return CoffeeBook.builder().
                 title(title).

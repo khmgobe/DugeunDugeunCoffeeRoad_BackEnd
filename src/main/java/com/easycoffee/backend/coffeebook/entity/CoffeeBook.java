@@ -4,6 +4,7 @@ import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookSaveDto;
 import com.easycoffee.backend.coffeebook.dto.request.CoffeeBookUpdateDto;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
 import com.easycoffee.backend.common.util.BaseEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,16 +23,20 @@ public class CoffeeBook extends BaseEntity {
     private Long id;
 
     @Column(name = "book_title")
+    @Schema(description = "제목")
     private String title;
 
     @Column(name = "book_content")
+    @Schema(description = "내용")
     private String content;
 
     @Column(name = "book_category")
+    @Schema(description = "카테고리")
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(name = "book_deleted")
+    @Schema(defaultValue = "false", description = "삭제 여부", hidden = true)
     private Boolean deleted;
 
     public CoffeeBookSaveDto toDto() {
