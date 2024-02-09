@@ -18,11 +18,11 @@ public class CoffeeRepository {
     }
 
     public Coffee findById(Long id) {
-        return em.find(Coffee.class, id);
+        return em.createQuery("select c from Coffee c join fetch c.coffeeBean where c.id =: id ", Coffee.class).setParameter("id", id).getSingleResult();
     }
 
     public List<Coffee> find() {
-        return em.createQuery("select c from Coffee c ", Coffee.class).getResultList();
+        return em.createQuery("select distinct c from Coffee c join fetch c.coffeeBean", Coffee.class).getResultList();
     }
 
     public void update(Coffee coffee) {
