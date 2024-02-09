@@ -10,11 +10,6 @@ public class CoffeeBeanSaveDto {
     private Long id;
 
     private String name;
-
-    private String country;
-
-    private String variety;
-
     private String note;
 
     private String distribution;
@@ -23,8 +18,6 @@ public class CoffeeBeanSaveDto {
     public CoffeeBean toEntity() {
         return CoffeeBean.builder().
                 name(name).
-                country(country).
-                variety(variety).
                 note(note).
                 distribution(distribution).
                 build();
