@@ -3,32 +3,10 @@ package com.easycoffee.backend.coffeebook.dto.request;
 import com.easycoffee.backend.coffee.dto.CoffeeSaveDto;
 import com.easycoffee.backend.coffeebook.entity.CoffeeBook;
 import com.easycoffee.backend.coffeebook.enumeration.Category;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
-import static lombok.AccessLevel.*;
 
-@Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = PROTECTED)
-public class CoffeeBookSaveDto {
-
-
-    private Long id;
-
-    private String title;
-
-    private String content;
-
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
-    @Schema(defaultValue = "false", description = "삭제 여부", hidden = true)
-    private Boolean deleted;
-
-    private CoffeeSaveDto coffee;
+public record CoffeeBookSaveDto (Long id, String title, String content, Category category, Boolean deleted, CoffeeSaveDto coffeeSaveDto){
 
     public CoffeeBook toEntity() {
         return CoffeeBook.builder().
@@ -36,7 +14,7 @@ public class CoffeeBookSaveDto {
                 content(content).
                 category(category).
                 deleted(false).
-                coffee(coffee.toEntity()).
+                coffee(coffeeSaveDto.toEntity()).
                 build();
     }
 }

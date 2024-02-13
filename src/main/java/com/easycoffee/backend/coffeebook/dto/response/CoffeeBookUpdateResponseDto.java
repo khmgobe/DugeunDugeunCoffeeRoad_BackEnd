@@ -12,21 +12,8 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
 @Builder
-public class CoffeeBookUpdateResponseDto {
-
-    private Long id;
-
-    private String title;
-
-    private String content;
-
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
-    private LocalDateTime updateDate;
-
+public record CoffeeBookUpdateResponseDto (Long id, String title, String content, Category category, LocalDateTime updateDate){
 
     public static CoffeeBookUpdateResponseDto response(CoffeeBook coffeeBook) {
         return CoffeeBookUpdateResponseDto.builder().

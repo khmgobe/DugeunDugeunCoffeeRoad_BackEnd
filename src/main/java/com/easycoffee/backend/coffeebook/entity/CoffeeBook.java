@@ -52,8 +52,8 @@ public class CoffeeBook extends BaseEntity {
     }
 
     public void updateBook(CoffeeBookUpdateDto coffeeBookUpdateDto) {
-        this.title = coffeeBookUpdateDto.getTitle();
-        this.content = coffeeBookUpdateDto.getContent();
-        this.category = coffeeBookUpdateDto.getCategory();
+        this.title = coffeeBookUpdateDto.title();
+        this.content = coffeeBookUpdateDto.content();
+        this.category = coffeeBookUpdateDto.category();
     }
 }
