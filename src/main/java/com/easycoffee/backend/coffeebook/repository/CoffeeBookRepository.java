@@ -22,7 +22,10 @@ public class CoffeeBookRepository {
     }
 
     public List<CoffeeBook> find() {
-         return em.createQuery("select c from CoffeeBook c join fetch c.coffee where c.deleted = false").getResultList();
+         return em.createQuery("select c from CoffeeBook c " +
+                 "join fetch c.coffee " +
+                 "join fetch c.coffee.coffeeBean " +
+                 "where c.deleted = false").getResultList();
     }
 
     public void update(CoffeeBook coffeeBook) {
