@@ -22,34 +22,34 @@ public class CoffeeBookApiController {
     private final CoffeeBookService coffeeBookService;
 
     @Operation(summary = "커피도감 1건을 조회합니다.")
-    @GetMapping("/easycoffee/coffeebooks/{id}")
+    @GetMapping("/api/v1/easycoffee/coffeebooks/{id}")
     public CoffeeBookResponseDto findById(@PathVariable("id") Long id) {
         return coffeeBookService.findById(id);
     }
 
     @Operation(summary = "모든 커피도감을 다 조회합니다.")
-    @GetMapping("/easycoffee/coffeebooks/find")
+    @GetMapping("/api/v1/easycoffee/coffeebooks/find")
     public List<CoffeeBookResponseDto> find() {
         return coffeeBookService.find();
     }
 
     @Operation(summary = "커피도감을 저장합니다.")
-    @PostMapping("/easycoffee/coffeebooks/save")
+    @PostMapping("/api/v1/easycoffee/coffeebooks/save")
     public CoffeeBookSaveResponseDto save(@RequestBody CoffeeBookSaveDto coffeeBookSaveDto) {
         return coffeeBookService.save(coffeeBookSaveDto);
     }
 
-    @DeleteMapping("/easycoffee/coffeebooks/completelyDelete/{id}")
+    @DeleteMapping("/api/v1/easycoffee/coffeebooks/completelyDelete/{id}")
     public CoffeeBookDeleteResponseDto completelyDelete(@PathVariable(value = "id", required = false) Long id) {
         return coffeeBookService.completelyDelete(id);
     }
 
-    @DeleteMapping("/easycoffee/coffeebooks/delete{id}")
+    @DeleteMapping("/api/v1/easycoffee/coffeebooks/delete{id}")
     public CoffeeBookDeleteResponseDto delete(@PathVariable(value = "id", required = false) Long id) {
         return coffeeBookService.delete(id);
     }
 
-    @PatchMapping("/easycoffee/coffeebooks/update")
+    @PatchMapping("/api/v1/easycoffee/coffeebooks/update")
     public CoffeeBookUpdateResponseDto update(@RequestBody CoffeeBookUpdateDto coffeeBookUpdateDto) {
         return coffeeBookService.update(coffeeBookUpdateDto);
     }
